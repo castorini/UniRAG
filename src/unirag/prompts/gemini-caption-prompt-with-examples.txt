@@ -1,0 +1,4 @@
+I have provided you {num} image(s) and their corresponding caption(s) as example(s) and one last image without a caption.
+
+Generate the caption for the last remaining image based on your understanding of the last image and provided image-caption examples.
+Only respond with the caption string; do not say any other words or explain. The answer must be compulsarily in one line.

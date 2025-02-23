@@ -1,37 +1,33 @@
 import argparse
-from datetime import datetime
-from enum import Enum
 import json
-from mimetypes import guess_type
 import os
 import pathlib
 import time
-from tqdm import tqdm
+from datetime import datetime
+from enum import Enum
+from mimetypes import guess_type
 from typing import Dict, List, Tuple
 
-from dotenv import load_dotenv
+import generator_prompt
 import openai
+import vertexai
+from dotenv import load_dotenv
+from incontext_example_provider import (get_rag_fewshot_examples,
+                                        get_random_fewshot_examples)
 from openai import AzureOpenAI, OpenAI
 from PIL import Image
-from transformers import (
-    Blip2Processor,
-    Blip2ForConditionalGeneration,
-    LlavaNextForConditionalGeneration,
-    LlavaNextProcessor,
-)
-import vertexai
+from tqdm import tqdm
+from transformers import (Blip2ForConditionalGeneration, Blip2Processor,
+                          LlavaNextForConditionalGeneration,
+                          LlavaNextProcessor)
 from vertexai import generative_models
-from vertexai.preview.generative_models import GenerativeModel, GenerationConfig
+from vertexai.preview.generative_models import (GenerationConfig,
+                                                GenerativeModel)
 
-import generator_prompt
-from incontext_example_provider import (
-    get_rag_fewshot_examples,
-    get_random_fewshot_examples,
-)
-
-load_dotenv()
+load_dotenv(dotenv_path=f".env.local")
 
 SYSTEM_MESSAGE = "You are an intelligent helpful assistant AI that is an expert in generating captions for provided images."
+MAX_RETRY = 3
 
 
 def infer_gemini(
@@ -105,7 +101,7 @@ def infer_gpt(
     azure_openai_api_version = os.environ["AZURE_OPENAI_API_VERSION"]
     azure_openai_api_base = os.environ["AZURE_OPENAI_API_BASE"]
     open_ai_api_key = os.environ["OPEN_AI_API_KEY"]
-    model_name = os.environ["MODEL_NAME"]
+    model_name = os.environ["GPT_MODEL_NAME"]
 
     if all([open_ai_api_key, azure_openai_api_base, azure_openai_api_version]):
         client = AzureOpenAI(
@@ -169,6 +165,7 @@ def infer_gpt(
             with open(f"{samples_dir}/prompt_{idx}.txt", "w") as f:
                 json.dump(messages, f)
                 f.write("\n")
+        attempt_count = 0
         while True:
             # Try calling the inference in a while loop to avoid errors related to rate limits, API unreliablity, connection issues, etc.
             try:
@@ -190,6 +187,11 @@ def infer_gpt(
                     break
                 print(f"Encountered {e}")
                 # Wait for a second before retrying the request
+                attempt_count += 1
+                if attempt_count >= MAX_RETRY:
+                    print(f"Giving up after {MAX_RETRY} retries.")
+                    output = ""
+                    break
                 time.sleep(1)
 
         print(f"Processed image: {image_path}")

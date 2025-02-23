@@ -215,9 +215,13 @@ def infer_llava(
         device_map="auto",
         low_cpu_mem_usage=True,
         cache_dir=os.environ["CACHE_DIR"],
+        token=os.environ["HF_TOKEN"],
     )
     processor = LlavaNextProcessor.from_pretrained(
-        model_name, use_fast=True, cache_dir=os.environ["CACHE_DIR"]
+        model_name,
+        use_fast=True,
+        cache_dir=os.environ["CACHE_DIR"],
+        token=os.environ["HF_TOKEN"],
     )
     # recommended for batch mode generation
     processor.tokenizer.padding_side = "left"
@@ -242,7 +246,7 @@ def infer_llava(
     outputs = []
     for i in tqdm(range(0, len(prompts), bs), desc="Batching inputs"):
         inputs = processor(
-            prompts[i : i + bs],
+            text=prompts[i : i + bs],
             images=input_images[i : i + bs],
             padding=True,
             return_tensors="pt",

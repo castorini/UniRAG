@@ -383,7 +383,7 @@ def main(args):
     samples_dir = os.path.join(result_dir, "samples")
     os.makedirs(samples_dir, exist_ok=True)
     result = infer_mapping[args.model_name](
-        images[:4], p_class, retrieval_dict, max_output_tokens, samples_dir
+        images, p_class, retrieval_dict, max_output_tokens, samples_dir
     )
     output_path = os.path.join(
         result_dir, f"{args.index}_{datetime.isoformat(datetime.now())}.json"

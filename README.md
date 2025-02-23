@@ -12,12 +12,12 @@ This repository works with [UniIR](https://github.com/TIGER-AI-Lab/UniIR)'s BLIP
         "qid": "9:6", "query_txt": null, "query_img_path": "mbeir_images/mscoco_images/val2014/COCO_val2014_000000391895.jpg", "query_modality": "image", "query_src_content": null, "pos_cand_list": ["9:2", "9:3", "9:4", "9:5", "9:6"], "neg_cand_list": [], "task_id": 3
     },
     "candidates": [
-        {"txt": null, "img_path": "mbeir_images/mscoco_images/val2014/COCO_val2014_000000391895.jpg", "modality": "image", "did": "9:1", "src_content": null}, 
+        {"txt": null, "img_path": "mbeir_images/mscoco_images/val2014/COCO_val2014_000000391895.jpg", "modality": "image", "did": "9:1", "src_content": null},
         ...,
         {"txt": "A man riding on the back of a motorcycle down a road.", "img_path": null, "modality": "text", "did": "9:14174", "src_content": null}
     ],
     "complement_candidates": [
-        {"txt": "Man riding a motor bike on a dirt road on the countryside.", "img_path": null, "modality": "text", "did": "9:3", "src_content": null}, 
+        {"txt": "Man riding a motor bike on a dirt road on the countryside.", "img_path": null, "modality": "text", "did": "9:3", "src_content": null},
         ...,
         {"txt": null, "img_path": "mbeir_images/mscoco_images/val2014/COCO_val2014_000000214369.jpg", "modality": "image", "did": "9:14173", "src_content": null}
     ]
@@ -44,4 +44,3 @@ We recommend separate conda environments for retrieval(UniIR) vs generation (Uni
 ## Caption Sampling
 
 ## Evaluation
-

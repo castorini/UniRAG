@@ -2,8 +2,8 @@ import argparse
 import json
 import os
 import re
-from tqdm import tqdm
 
+import candidate_retrieval as cr
 import jsonlines
 from pycocoevalcap.bleu.bleu import Bleu
 from pycocoevalcap.cider.cider import Cider
@@ -11,8 +11,7 @@ from pycocoevalcap.meteor.meteor import Meteor
 from pycocoevalcap.rouge.rouge import Rouge
 from pycocoevalcap.spice.spice import Spice
 from pycocoevalcap.tokenizer.ptbtokenizer import PTBTokenizer
-
-import candidate_retrieval as cr
+from tqdm import tqdm
 
 
 def file_in_dir(dirname, extension):
@@ -152,7 +151,10 @@ def main():
                     caption = obj["candidates"][0]["txt"]
                     if caption:
                         candidates = [caption]
-                    elif obj["complement_candidates"][0]["txt"]:
+                    elif (
+                        obj["complement_candidates"][0]
+                        and obj["complement_candidates"][0]["txt"]
+                    ):
                         candidates = [obj["complement_candidates"][0]["txt"]]
                     else:
                         # None captions are not acceptable, replace them with blank

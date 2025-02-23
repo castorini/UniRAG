@@ -6,6 +6,7 @@ from PIL import Image
 from vertexai import generative_models
 
 
+
 class Prompt:
 
     def __init__(self, prompt_file, k) -> None:
@@ -38,7 +39,7 @@ class Prompt:
         else:
             prompt = self.prompt_template
         return prompt
-
+    
     def prepare_gemini_message(self, num_candidates):
         num_examples = min(self.k, num_candidates)
         if self.k > 0:
@@ -104,7 +105,7 @@ class Prompt:
             assert hit[1]
             image_urls.append(self.encode_image_as_url(hit[1]))
         return image_urls
-
+    
     def get_fewshot_image_data(self, retrieval_results):
         num_examples = min(self.k, len(retrieval_results))
         image_datas = []

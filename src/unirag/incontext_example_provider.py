@@ -2,8 +2,9 @@ import os
 import random
 
 import jsonlines
-from candidate_retrieval import CandidateLookUp
 from tqdm import tqdm
+
+from candidate_retrieval import CandidateLookUp
 
 
 def get_candidates(obj, base_mbeir_path, image_query, txt_query):

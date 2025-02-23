@@ -24,7 +24,7 @@ This repository works with [UniIR](https://github.com/TIGER-AI-Lab/UniIR)'s BLIP
 }
 ```
 
-At end of this step you have the following base dirs configured:
+At end of this step you should have the following base dirs configured:
 - `base_mbeir_path` is where you have downloaded and extracted the M-BEIR dataset.
 - `base_retrieval_path` is where the UniIR retrieval results will be stored. If you follow the UniIR instructions it would be a path ending in `/retrieval_results`
 
@@ -41,6 +41,6 @@ We recommend separate conda environments for retrieval(UniIR) vs generation (Uni
 
 # Image Generation
 
-## Caption Sampling
+## Query Sampling
 
 ## Evaluation

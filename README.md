@@ -4,7 +4,7 @@ This repository is the codebase for paper [UniRAG: Universal Retrieval Augmentat
 <img src="docs/images/unirag_overview.png" alt="UniRAG Overview" style="width:95%;">
 </p>
 
-# Prerequirements
+## Prerequirements
 This repository works with [UniIR](https://github.com/TIGER-AI-Lab/UniIR)'s BLIP_FF and CLIP_SF retreivers and its M-BEIR dataset. Before proceeding to the next step, you should follow its instructions for [unirag](https://github.com/TIGER-AI-Lab/UniIR/tree/main?tab=readme-ov-file#unirag-evaluation) eval to get the retrieved candidates in a jsonl file. As shown below, each line entry in this file will be a json object containing the query as well as its retrieved candidates and complement candidates that together make the image, text pairs used as in context examples in the generation step.
 ```json
 {
@@ -28,11 +28,12 @@ At end of this step you should have the following base dirs configured:
 - `base_mbeir_path` is where you have downloaded and extracted the M-BEIR dataset.
 - `base_retrieval_path` is where the UniIR retrieval results will be stored. If you follow the UniIR instructions it would be a path ending in `/retrieval_results`
 
-# Installation
+## Installation
 We recommend separate conda environments for retrieval(UniIR) vs generation (UniRAG).
 
 
-# API Keys and other env variables must be in `.env.local`
+## Environment variables
+API Keys and other env variables must be in `.env.local`
 ```
 # Open AI 
 OPEN_AI_API_KEY=<your api key>
@@ -49,22 +50,22 @@ HF_TOKEN=<HF access token>
 ```
 
 
-# Caption Generation
+## Caption Generation
 `caption_generation_inference.py` generates captions for a the jsonl file created in the previous step.
 The prompt mode, retriever model, generator model, number of fewshot examples are all configurable.
-To regenerate all our results run the following script from the root repository dir.
+To regenerate all our caption generation results (tables 3 and 4) run the following script from the root repository dir.
 ```bash
 bash scripts/caption_generation.sh
 ```
-## Evaluation
+### Evaluation
 `eval_caption_generation.py` measures BLEU1-4, CIDER, ROUGE and SPICE for the generated captions.
-To regenerate all results generated in the previous step run the following script from the root repository dir.
+To evaluate all results generated in the previous step run the following script from the root repository dir.
 ```bash
 bash scripts/eval_caption_generation.sh
 ```
 
-# Image Generation
+## Image Generation
 
-## Query Sampling
+### Query Sampling
 
-## Evaluation
+### Evaluation

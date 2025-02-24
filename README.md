@@ -32,7 +32,7 @@ At end of this step you should have the following base dirs configured:
 We recommend separate conda environments for retrieval(UniIR) vs generation (UniRAG).
 
 
-## Env variables
+## Environment variables
 API Keys and other env variables must be in `.env.local`
 ```
 # Open AI 

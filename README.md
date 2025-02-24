@@ -66,7 +66,7 @@ bash scripts/eval_caption_generation.sh
 
 ## Image Generation
 MSCOCO has around 25k captions for 5k images. To save compute time, as part of the dataset prepration step, we sample one caption per each ground truth image to use as query for image generationto save compute time.
-### Dataset Prepration
+### Dataset Preparation
 `prepare_dataset.py` processes the caption queries and their ground truth image paths and outputs a queries folder. The queries folder contains an `images` folder storing the actual ground truth images. Each image under this folder has a name that starts with its cooresponding qid. This is later on used in the evaluation step.
 The query folder also contains the query + retrieved candidates jsonl file.
 When the `do-sample` argument is specified, the jsonl file only contains the retrieved results for the sampled qids, filtering out the unselected queries and their candidates. In this mode a `sampled_ids.json` is also created to save the ids of sampled queries. This is used when you want to reuse the same set of sampled queries for multiple runs (with blip vs clip retrieves for example).

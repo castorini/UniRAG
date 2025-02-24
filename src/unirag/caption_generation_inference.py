@@ -12,17 +12,21 @@ import generator_prompt
 import openai
 import vertexai
 from dotenv import load_dotenv
-from incontext_example_provider import (get_rag_fewshot_examples,
-                                        get_random_fewshot_examples)
+from incontext_example_provider import (
+    get_rag_fewshot_examples,
+    get_random_fewshot_examples,
+)
 from openai import AzureOpenAI, OpenAI
 from PIL import Image
 from tqdm import tqdm
-from transformers import (Blip2ForConditionalGeneration, Blip2Processor,
-                          LlavaNextForConditionalGeneration,
-                          LlavaNextProcessor)
+from transformers import (
+    Blip2ForConditionalGeneration,
+    Blip2Processor,
+    LlavaNextForConditionalGeneration,
+    LlavaNextProcessor,
+)
 from vertexai import generative_models
-from vertexai.preview.generative_models import (GenerationConfig,
-                                                GenerativeModel)
+from vertexai.preview.generative_models import GenerationConfig, GenerativeModel
 
 load_dotenv(dotenv_path=f".env.local")
 
@@ -38,9 +42,10 @@ def infer_gemini(
     samples_dir: str,
 ):
     vertexai.init(
-        project=os.environ["GCLOUD_PROJECT"], location=os.environ["GCLOUD_REGION"]
+        project=os.environ.get("GCLOUD_PROJECT"),
+        location=os.environ.get("GCLOUD_REGION"),
     )
-    model_name = os.environ["GEMINI_MODEL_NAME"]
+    model_name = os.environ.get("GEMINI_MODEL_NAME")
 
     outputs = []
     for idx, image_path in enumerate(images):
@@ -82,7 +87,8 @@ def infer_gemini(
             print(f"Processed image: {image_path}")
             print(response.text)
             output = response.text
-        except:
+        except Exception as e:
+            print(e)
             output = ""
         outputs.append(
             {"qid": qid, "image": image_path, "prompt": message, "response": output}
@@ -98,10 +104,10 @@ def infer_gpt(
     max_output_tokens: int,
     samples_dir: str,
 ):
-    azure_openai_api_version = os.environ["AZURE_OPENAI_API_VERSION"]
-    azure_openai_api_base = os.environ["AZURE_OPENAI_API_BASE"]
-    open_ai_api_key = os.environ["OPEN_AI_API_KEY"]
-    model_name = os.environ["GPT_MODEL_NAME"]
+    azure_openai_api_version = os.environ.get("AZURE_OPENAI_API_VERSION")
+    azure_openai_api_base = os.environ.get("AZURE_OPENAI_API_BASE")
+    open_ai_api_key = os.environ.get("OPEN_AI_API_KEY")
+    model_name = os.environ.get("GPT_MODEL_NAME")
 
     if all([open_ai_api_key, azure_openai_api_base, azure_openai_api_version]):
         client = AzureOpenAI(
@@ -216,14 +222,14 @@ def infer_llava(
         model_name,
         device_map="auto",
         low_cpu_mem_usage=True,
-        cache_dir=os.environ["CACHE_DIR"],
-        token=os.environ["HF_TOKEN"],
+        cache_dir=os.environ.get("CACHE_DIR"),
+        token=os.environ.get("HF_TOKEN"),
     )
     processor = LlavaNextProcessor.from_pretrained(
         model_name,
         use_fast=True,
-        cache_dir=os.environ["CACHE_DIR"],
-        token=os.environ["HF_TOKEN"],
+        cache_dir=os.environ.get("CACHE_DIR"),
+        token=os.environ.get("HF_TOKEN"),
     )
     # recommended for batch mode generation
     processor.tokenizer.padding_side = "left"
@@ -292,10 +298,10 @@ def infer_blip(
         model_name,
         device_map="auto",
         low_cpu_mem_usage=True,
-        cache_dir=os.environ["CACHE_DIR"],
+        cache_dir=os.environ.get("CACHE_DIR"),
     )
     processor = Blip2Processor.from_pretrained(
-        model_name, use_fast=True, cache_dir=os.environ["CACHE_DIR"]
+        model_name, use_fast=True, cache_dir=os.environ.get("CACHE_DIR")
     )
 
     prompts = []

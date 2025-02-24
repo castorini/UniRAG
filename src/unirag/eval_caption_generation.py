@@ -48,7 +48,7 @@ def get_ground_truth(candidate_path, retrieval_jsonl_path, res):
                     candidates.append(clu.retrieve_candidate_txt_from_did(cand))
                 gts[img] = candidates
             else:
-                assert False, "retrieved queries and llm queies must match"
+                assert False, "retrieved queries and llm queries must match"
 
             if len(gts) == len(res):
                 break
@@ -159,7 +159,7 @@ def main():
                     else:
                         # None captions are not acceptable, replace them with blank
                         print(
-                            f'Added empty retriever canption for {obj["query"]["qid"]}'
+                            f'Added empty retriever caption for {obj["query"]["qid"]}'
                         )
                         candidates = [""]
 

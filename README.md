@@ -24,7 +24,7 @@ This repository works with [UniIR](https://github.com/TIGER-AI-Lab/UniIR)'s BLIP
 }
 ```
 
-At end of this step you have the following base dirs configured:
+At end of this step you should have the following base dirs configured:
 - `base_mbeir_path` is where you have downloaded and extracted the M-BEIR dataset.
 - `base_retrieval_path` is where the UniIR retrieval results will be stored. If you follow the UniIR instructions it would be a path ending in `/retrieval_results`
 
@@ -32,15 +32,39 @@ At end of this step you have the following base dirs configured:
 We recommend separate conda environments for retrieval(UniIR) vs generation (UniRAG).
 
 
-# Setting API Keys for GPT and Gemini Models
+# API Keys and other env variables must be in `.env.local`
+```
+# Open AI 
+OPEN_AI_API_KEY=<your api key>
+GPT_MODEL_NAME=<gpt model name e.g., gpt-4o-mini>
+
+# Vertex AI
+GCLOUD_PROJECT=<GCP project id> 
+GCLOUD_REGION=<region e.g, us-central1>
+GEMINI_MODEL_NAME=<gemini model e.g., gemini-pro-vision>
+
+# Other variables
+CACHE_DIR=<cache dir>
+HF_TOKEN=<HF access token>
+```
 
 
 # Caption Generation
-
+`caption_generation_inference.py` generates captions for a the jsonl file created in the previous step.
+The prompt mode, retriever model, generator model, number of fewshot examples are all configurable.
+To regenerate all our results run the following script from the root repository dir.
+```bash
+bash scripts/caption_generation.sh
+```
 ## Evaluation
+`eval_caption_generation.py` measures BLEU1-4, CIDER, ROUGE and SPICE for the generated captions.
+To regenerate all results generated in the previous step run the following script from the root repository dir.
+```bash
+bash scripts/eval_caption_generation.sh
+```
 
 # Image Generation
 
-## Caption Sampling
+## Query Sampling
 
 ## Evaluation

@@ -12,17 +12,21 @@ import generator_prompt
 import openai
 import vertexai
 from dotenv import load_dotenv
-from incontext_example_provider import (get_rag_fewshot_examples,
-                                        get_random_fewshot_examples)
+from incontext_example_provider import (
+    get_rag_fewshot_examples,
+    get_random_fewshot_examples,
+)
 from openai import AzureOpenAI, OpenAI
 from PIL import Image
 from tqdm import tqdm
-from transformers import (Blip2ForConditionalGeneration, Blip2Processor,
-                          LlavaNextForConditionalGeneration,
-                          LlavaNextProcessor)
+from transformers import (
+    Blip2ForConditionalGeneration,
+    Blip2Processor,
+    LlavaNextForConditionalGeneration,
+    LlavaNextProcessor,
+)
 from vertexai import generative_models
-from vertexai.preview.generative_models import (GenerationConfig,
-                                                GenerativeModel)
+from vertexai.preview.generative_models import GenerationConfig, GenerativeModel
 
 load_dotenv(dotenv_path=f".env.local")
 
@@ -389,7 +393,7 @@ def main(args):
     samples_dir = os.path.join(result_dir, "samples")
     os.makedirs(samples_dir, exist_ok=True)
     result = infer_mapping[args.model_name](
-        images[:2], p_class, retrieval_dict, max_output_tokens, samples_dir
+        images, p_class, retrieval_dict, max_output_tokens, samples_dir
     )
     output_path = os.path.join(
         result_dir, f"{args.index}_{datetime.isoformat(datetime.now())}.json"

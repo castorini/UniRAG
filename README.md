@@ -34,11 +34,11 @@ We recommend separate conda environments for retrieval(UniIR) vs generation (Uni
 
 # API Keys and other env variables must be in `.env.local`
 ```
-#Open AI 
+# Open AI 
 OPEN_AI_API_KEY=<your api key>
 GPT_MODEL_NAME=<gpt model name e.g., gpt-4o-mini>
 
-#Vertex AI
+# Vertex AI
 GCLOUD_PROJECT=<GCP project id> 
 GCLOUD_REGION=<region e.g, us-central1>
 GEMINI_MODEL_NAME=<gemini model e.g., gemini-pro-vision>

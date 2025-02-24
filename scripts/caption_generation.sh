@@ -9,7 +9,7 @@ base_output_dir=/mnt/users/s8sharif/UniIR # --> TODO: change the base output dir
 # All the retative paths assume running the script from the root UniRAG folder `bash scripts/caption_generation.sh`
 
 # Table 3: caption generation for MSCOCO with all three models
-for model_name in "llava"; do # "gemini" "gpt"; do
+for model_name in "llava" "gemini" "gpt"; do
     for retriever_name in "BLIP_FF" "CLIP_SF"; do
         query_path=$base_retrieval_path"/"$retriever_name"/Large/Instruct/UniRAG/retrieved_candidates/mbeir_mscoco_task3_union_pool_test_k10_retrieved.jsonl"
             image_count=$(wc -l < $query_path)

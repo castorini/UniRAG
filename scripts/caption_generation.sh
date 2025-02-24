@@ -107,4 +107,3 @@ for retriever_name in "BLIP_FF" "CLIP_SF"; do
         --retriever_name $retriever_name
     done
 done
-

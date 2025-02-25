@@ -78,6 +78,7 @@ bash scripts/prepare_dataset.sh
 `image_generation_inference.py` generates images for a the jsonl file sampled in the previous step.
 The prompt mode, retriever model, generator model, and number of fewshot examples are all configurable.
 To regenerate all our image generation results (tables 5 and 6) run the following script from the root repository dir.
+For convenience the `models` dir and `utils.py` are copied from the [lavit](https://github.com/jy0205/LaVIT/tree/main/LaVIT) repository, as is. As an alternative you can clone that repository, and copy the generation script there to run inference with lavit.
 ```bash
 bash scripts/image_generation.sh
 ```

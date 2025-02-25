@@ -35,13 +35,9 @@ for model_name in "lavit" "emu2"; do
                     --retrieved_results_path $query_path \
                     --retriever_name $retriever_name \
                     --model_path $model_path # ignored for lavit
-                    break
             done
-            break
         done
-        break
     done
-    break
 done
 
 # Table 6: image generation for fashion200k with lavit

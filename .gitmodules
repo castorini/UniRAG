@@ -1,6 +1,0 @@
-[submodule "lavit"]
-	path = lavit
-	url = git@github.com:jy0205/LaVIT.git
-[submodule "src/lavit"]
-	path = src/lavit
-	url = git@github.com:jy0205/LaVIT.git

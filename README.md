@@ -52,7 +52,7 @@ HF_TOKEN=<HF access token>
 
 ## Caption Generation
 `caption_generation_inference.py` generates captions for a the jsonl file created in the previous step.
-The prompt mode, retriever model, generator model, number of fewshot examples are all configurable.
+The prompt mode, retriever model, generator model, and number of fewshot examples are all configurable.
 To regenerate all our caption generation results (tables 3 and 4) run the following script from the root repository dir.
 ```bash
 bash scripts/caption_generation.sh
@@ -74,4 +74,16 @@ To reproduce our image generation results run the following:
 ```bash
 bash scripts/prepare_dataset.sh
 ```
+### Inference
+`image_generation_inference.py` generates images for a the jsonl file sampled in the previous step.
+The prompt mode, retriever model, generator model, and number of fewshot examples are all configurable.
+To regenerate all our image generation results (tables 5 and 6) run the following script from the root repository dir.
+```bash
+bash scripts/image_generation.sh
+```
 ### Evaluation
+`eval_image_generation.py` measures FID, CLIP SCORE, and Inception Score (IS) for the generated images.
+To evaluate all results generated in the previous step run the following script from the root repository dir.
+```bash
+bash scripts/eval_image_generation.sh
+```

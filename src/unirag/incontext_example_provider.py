@@ -78,7 +78,7 @@ def filter_qids(queries_dict, index):
 
 
 def get_random_fewshot_examples(
-    retrieved_results_path, base_mbeir_path, candidate_file, index
+    retrieved_results_path, base_mbeir_path, candidate_file, index, k
 ):
     candidate_lookup = CandidateLookUp(candidate_file)
     queries_dict = {}
@@ -98,7 +98,7 @@ def get_random_fewshot_examples(
         example_ids = random.sample([id for id in qids if id != qid], 10)
         candidates = get_positive_cands(
             base_mbeir_path, queries_dict, example_ids, candidate_lookup
-        )
+        )[:k]
         if image_query:
             query = os.path.join(base_mbeir_path, image_query)
             image_queries.append(query)
@@ -119,7 +119,7 @@ def get_random_fewshot_examples(
         return txt_queries, retrieval_dict
 
 
-def get_rag_fewshot_examples(retrieved_results_path, base_mbeir_path, index):
+def get_rag_fewshot_examples(retrieved_results_path, base_mbeir_path, index, k):
     queries_dict = {}
     objects_dict = {}
     retrieval_dict = {}
@@ -137,7 +137,7 @@ def get_rag_fewshot_examples(retrieved_results_path, base_mbeir_path, index):
         txt_query = q["query_txt"]
         candidates = get_candidates(
             objects_dict[qid], base_mbeir_path, image_query, txt_query
-        )
+        )[:k]
         if image_query:
             query = os.path.join(base_mbeir_path, image_query)
             image_queries.append(query)

@@ -1,1 +1,2 @@
 .env.local
+src/unirag/models/__pycache__

@@ -377,10 +377,11 @@ def main(args):
             args.base_mbeir_path,
             args.candidates_file_path,
             args.index,
+            args.k,
         )
     else:
         images, retrieval_dict = get_rag_fewshot_examples(
-            args.retrieved_results_path, args.base_mbeir_path, args.index
+            args.retrieved_results_path, args.base_mbeir_path, args.index, args.k
         )
 
     p_class = generator_prompt.Prompt(args.prompt_file, args.k)

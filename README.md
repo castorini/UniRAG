@@ -30,7 +30,11 @@ At end of this step you should have the following base dirs configured:
 
 ## Installation
 We recommend separate conda environments for retrieval(UniIR) vs generation (UniRAG).
-
+```bash
+conda create -n unirag python=3.10
+conda activate unirag
+pip install -r requirements.txt
+```
 
 ## Environment Variables
 API Keys and other env variables must be in `.env.local`
